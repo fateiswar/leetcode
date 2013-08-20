@@ -3,7 +3,7 @@ public class Solution {
     HashMap<String, Integer> dist;
     void dfs(String end, String curr, ArrayList<String> sub){
         if(end.equals(curr)){
-            answer.add(sub.clone());
+            answer.add((ArrayList<String>)sub.clone());
             return;
         }
         char[] s = curr.toCharArray();
