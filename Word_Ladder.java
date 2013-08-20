@@ -1,12 +1,4 @@
 public class Solution {
-    
-    public boolean conn(String a, String b){
-        if(a.length() != b.length()) return false;
-        int diff = 0;
-        for(int i = 0; i < a.length() && diff < 2; i++)
-            diff += (a.charAt(i) != b.charAt(i) ? 1:0);
-        return diff == 1;
-    }
     public int ladderLength(String start, String end, HashSet<String> dict) {
         // Start typing your Java solution below
         // DO NOT write main() function
@@ -19,12 +11,22 @@ public class Solution {
         Q.offer(end);
         while(Q.size() != 0){
             String curr = Q.poll();
-            int d = mp.get(curr);
-            for(String next : dict) if(conn(curr, next) && dist.get(next) == null){
-                dist.put(next, d + 1);
-                Q.offer(next);
+            int d = dist.get(curr);
+            char[] s = curr.toCharArray();
+            for(int i = 0; i < s.length; i++){
+                char c = s[i];
+                for(char j = 'a'; j <= 'z'; j++)if(c != j){
+                    s[i] = j;
+                    String next = new String(s);
+                    if(dict.contains(next) && dist.get(next) == null){
+                        dist.put(next, d + 1);
+                        Q.offer(next);
+                    }
+                }
+                s[i] = c;
             }
         }
-        return mp.get(start) + 1;
+        if(dist.get(start) == null) return 0;
+        return dist.get(start) + 1;
     }
 }
