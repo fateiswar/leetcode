@@ -34,11 +34,8 @@ public class Solution {
             pre = curr;
             curr = next;
         }
-        if(curr == null) p1.next = pre;
-        else{
-            p1.next.next = curr;
-            p1.next = curr;
-        }
+        p1.next.next = curr;
+        p1.next = pre;
         return phead.next;
     }
 }
