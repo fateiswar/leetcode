@@ -14,7 +14,7 @@ public class Solution {
         }
         for(int i = 0; i + needle.length() <= haystack.length(); i++){
             if(i != 0){
-                a = (a + mod - ((haystack.charAt(i - 1) * c) & mod)) & mod;
+                a = (a + mod + 1 - ((haystack.charAt(i - 1) * c) & mod)) & mod;
                 a = ((a << 8) + haystack.charAt(i + needle.length() - 1)) & mod;
             }
             if(a != b) continue;
