@@ -1,4 +1,3 @@
-//uncommited
 public class Solution {
     public boolean isNumber(String ss) {
         // Start typing your Java solution below
@@ -24,12 +23,13 @@ public class Solution {
             }else if(s[pos] == '.'){
                 if(isExp || isDot) return false;
                 isDot = true;
-                leading = 0;
             }else if(s[pos] > '0' && s[pos] <= '9'){
                 leading = -1;
+            }else if(s[pos] == '+' || s[pos] == '-'){
+                if(s[pos - 1] != 'E' && s[pos - 1] != 'e') return false;
             }else return false;
         }
-        if(isExp && leading == 0 || isDot && leading == 0) return false;
+        if(leading == 0) return false;
         return true;
     }
 }
