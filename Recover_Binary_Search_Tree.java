@@ -8,30 +8,23 @@
  * }
  */
 public class Solution {
-    TreeNode a, b, anext;
-    TreeNode dfs(TreeNode root, TreeNode pre){
+    TreeNode a, b;
+    public TreeNode dfs(TreeNode root, TreeNode pre){
         if(root.left != null){
-            TreeNode last = dfs(root.left, pre);
-            if(last.val > root.val){
-                if(a == null)
-                    a = last;
-                b = root;
-            }
-        }else if(pre != null && pre.val > root.val){
-            if(a == null)
-                a = pre;
+            pre = dfs(root.left, pre); 
+        }
+        if(pre != null && pre.val > root.val){
             b = root;
+            if(a == null) a = pre;
         }
-        if(root.right != null){
-            return dfs(root.right, root);
-        }
+        if(root.right != null) return dfs(root.right, root);
         return root;
     }
     public void recoverTree(TreeNode root) {
         // Start typing your Java solution below
         // DO NOT write main() function
+        a=b=null;
         if(root == null) return;
-        a = b = null;
         dfs(root, null);
         int tmp = a.val;
         a.val = b.val;
